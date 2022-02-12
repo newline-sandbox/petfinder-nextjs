@@ -8,7 +8,7 @@ Live Demo: https://petfinder-nextjs.vercel.app/
 
 ![](https://www.dl.dropboxusercontent.com/s/hv6ku9cd4o1tvm3/Screen%20Shot%202022-02-09%20at%204.07.26%20PM.png)
 
-A statically generated Next.js application built with TypeScript and the Petfinder API. The application uses the Petfinder API to fetch listings of recently adopted pets and pets currently available for adoption. For styling, the application Tailwind CSS framework.
+A statically generated Next.js application built with TypeScript and the Petfinder API. The application uses the Petfinder API to fetch listings of recently adopted pets and pets currently available for adoption. For styling, the application uses the Tailwind CSS framework.
 
 Using the `getStaticProps` function, most of the application's content gets generated at build time. This reduces the number of requests sent to the Petfinder API, which limits each account to 1000 daily requests and 50 requests per second, and delivers both an improved user experience and better SEO results.
 
