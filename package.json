@@ -6,8 +6,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@plaiceholder/next": "^2.5.0",
     "next": "^12.2.5",
+    "plaiceholder": "^2.5.0",
     "react": "^18.2.0",
+    "react-blurhash": "^0.1.3",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {

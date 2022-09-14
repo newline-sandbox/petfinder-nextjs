@@ -1,4 +1,6 @@
 import { NextPage, GetStaticProps } from "next";
+import { getPlaiceholder } from "plaiceholder";
+import { ANIMAL_TYPES } from "../enums";
 import { AnimalType } from "../shared/interfaces/petfinder.interface";
 import TypeCardsGrid from "../components/TypeCardsGrid";
 
@@ -38,19 +40,35 @@ export const getStaticProps: GetStaticProps = async () => {
         },
       })
     ).json());
+
+    if (types.length > 0) {
+      types = await Promise.all(
+        types.map(async (type) => {
+          const { blurhash, img } = await getPlaiceholder(
+            ANIMAL_TYPES[type.name].image.url
+          );
+
+          return {
+            ...type,
+            id: type._links.self.href.match(/\/types\/([\w-]+)$/)[1],
+            blurhash,
+            img: {
+              ...img,
+              objectPosition:
+                ANIMAL_TYPES[type.name].image.styles?.objectPosition ||
+                "center",
+            },
+          };
+        })
+      );
+    }
   } catch (err) {
     console.error(err);
   }
 
   return {
     props: {
-      types:
-        types.length > 0
-          ? types.map((type) => ({
-              ...type,
-              id: type._links.self.href.match(/\/types\/([\w-]+)$/)[1],
-            }))
-          : types,
+      types,
     },
   };
 };

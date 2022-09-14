@@ -15,7 +15,7 @@ export const ANIMAL_TYPES = {
     image: {
       url: "https://images.unsplash.com/photo-1598935888738-cd2622bcd437?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&fit=crop&w=300&q=80",
       styles: {
-        backgroundPosition: "center top",
+        objectPosition: "center top",
       },
     },
     photographer: {
@@ -54,7 +54,7 @@ export const ANIMAL_TYPES = {
     image: {
       url: "https://images.unsplash.com/photo-1522858547137-f1dcec554f55?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8",
       styles: {
-        backgroundPosition: "-1rem center",
+        objectPosition: "-1rem center",
       },
     },
     photographer: {
@@ -75,7 +75,7 @@ export const ANIMAL_TYPES = {
     image: {
       url: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8",
       styles: {
-        backgroundPosition: "left center",
+        objectPosition: "left center",
       },
     },
     photographer: {

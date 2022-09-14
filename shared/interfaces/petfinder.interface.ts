@@ -1,3 +1,17 @@
+// Source: https://github.com/joe-bell/plaiceholder/blob/main/packages/plaiceholder/src/blurhash.ts#L8
+type IGetBlurhashReturn = {
+  hash: string;
+} & Record<"width" | "height", number>;
+
+// Source: https://github.com/joe-bell/plaiceholder/blob/main/packages/plaiceholder/src/get-image.ts#L62
+type ILoadImageReturn = {
+  src: string;
+  height: number;
+  width: number;
+  type?: string;
+  objectPosition?: string;
+};
+
 export interface AnimalAttributes {
   spayed_neutered: boolean;
   house_trained: boolean;
@@ -122,6 +136,8 @@ export interface AnimalTypeBreed {
 
 export interface AnimalType {
   id?: string;
+  blurhash?: IGetBlurhashReturn;
+  img?: ILoadImageReturn;
   name: string;
   coats: string[];
   colors: string[];
