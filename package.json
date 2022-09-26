@@ -3,7 +3,8 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "npm run build && next export"
   },
   "dependencies": {
     "@plaiceholder/next": "^2.5.0",

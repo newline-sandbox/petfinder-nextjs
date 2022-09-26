@@ -11,29 +11,7 @@ export interface TypePageProps {
   adoptedAnimals: Animal[];
 }
 
-const {
-  NEXT_PUBLIC_PETFINDER_API_URL,
-  NEXT_PUBLIC_PETFINDER_CLIENT_ID,
-  NEXT_PUBLIC_PETFINDER_CLIENT_SECRET,
-} = process.env;
-
-const getAccessToken = async () => {
-  const { access_token } = await (
-    await fetch(`${NEXT_PUBLIC_PETFINDER_API_URL}/oauth2/token`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify({
-        grant_type: "client_credentials",
-        client_id: NEXT_PUBLIC_PETFINDER_CLIENT_ID,
-        client_secret: NEXT_PUBLIC_PETFINDER_CLIENT_SECRET,
-      }),
-    })
-  ).json();
-
-  return access_token;
-};
+const { NEXT_PUBLIC_PETFINDER_API_URL, PETFINDER_ACCESS_TOKEN } = process.env;
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   let adoptedAnimals = [],
@@ -41,13 +19,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     type = {};
 
   try {
-    const accessToken = await getAccessToken();
-
     ({ type } = await (
       await fetch(`${NEXT_PUBLIC_PETFINDER_API_URL}/types/${params.type}`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${PETFINDER_ACCESS_TOKEN}`,
         },
       })
     ).json());
@@ -58,7 +34,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${PETFINDER_ACCESS_TOKEN}`,
           },
         }
       )
@@ -70,7 +46,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${PETFINDER_ACCESS_TOKEN}`,
           },
         }
       )
@@ -95,13 +71,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
   let paths = [];
 
   try {
-    const accessToken = await getAccessToken();
-
     const { types } = await (
       await fetch(`${NEXT_PUBLIC_PETFINDER_API_URL}/types`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${PETFINDER_ACCESS_TOKEN}`,
         },
       })
     ).json();
