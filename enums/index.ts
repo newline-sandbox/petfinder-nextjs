@@ -1,7 +1,23 @@
+interface AnimalTypesEnum {
+  [key: string]: {
+    image: {
+      url: string;
+      styles?: {
+        backgroundPosition?: string;
+        objectPosition?: string;
+      };
+    };
+    photographer: {
+      name: string;
+      url: string;
+    };
+  };
+}
+
 // Currently, the Petfinder API does not provide a slugified identifier and stock image for each animal type.
 // Once the API provides these data, remove this enum.
 // Note: Since each image has different set of dimensions, we must apply corrective styling for consistency.
-export const ANIMAL_TYPES = {
+export const ANIMAL_TYPES: AnimalTypesEnum = {
   Dog: {
     image: {
       url: "https://images.unsplash.com/photo-1507146426996-ef05306b995a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8",
