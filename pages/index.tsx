@@ -13,7 +13,7 @@ const {
 } = process.env;
 
 export const getStaticProps: GetStaticProps = async () => {
-  let types = [];
+  let types: AnimalType[] = [];
 
   try {
     const { access_token } = await (
@@ -48,7 +48,7 @@ export const getStaticProps: GetStaticProps = async () => {
         types.length > 0
           ? types.map((type) => ({
               ...type,
-              id: type._links.self.href.match(/\/types\/([\w-]+)$/)[1],
+              id: (type._links.self.href.match(/\/types\/([\w-]+)$/) || "")[1],
             }))
           : types,
     },
