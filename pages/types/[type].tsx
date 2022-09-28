@@ -1,9 +1,13 @@
 import { NextPage, GetStaticPaths, GetStaticProps } from "next";
+import { ParsedUrlQuery } from "querystring";
 import AnimalCardsList from "../../components/AnimalCardsList";
 import Breadcrumbs from "../../components/Breadcrumbs";
+import { TypePath } from "../../shared/interfaces/paths.interface";
 import {
   Animal,
   AnimalType,
+  AnimalTypeBreed,
+  AnimalTypesResponse,
 } from "../../shared/interfaces/petfinder.interface";
 
 export interface TypePageProps {
@@ -35,16 +39,30 @@ const getAccessToken = async () => {
   return access_token;
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  let adoptedAnimals = [],
-    breeds = [],
-    type = {};
+interface PageProps {
+  type: AnimalType;
+  adoptedAnimals: Animal[];
+}
+
+interface StaticPathParams extends ParsedUrlQuery {
+  type: string;
+}
+
+export const getStaticProps: GetStaticProps<
+  PageProps,
+  StaticPathParams
+> = async ({ params }) => {
+  let adoptedAnimals: Animal[] = [],
+    breeds: AnimalTypeBreed[] = [],
+    type!: AnimalType;
+
+  let { type: typeParam } = params as StaticPathParams;
 
   try {
     const accessToken = await getAccessToken();
 
     ({ type } = await (
-      await fetch(`${NEXT_PUBLIC_PETFINDER_API_URL}/types/${params.type}`, {
+      await fetch(`${NEXT_PUBLIC_PETFINDER_API_URL}/types/${typeParam}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
@@ -54,7 +72,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     ({ breeds } = await (
       await fetch(
-        `${NEXT_PUBLIC_PETFINDER_API_URL}/types/${params.type}/breeds`,
+        `${NEXT_PUBLIC_PETFINDER_API_URL}/types/${typeParam}/breeds`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -66,7 +84,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     ({ animals: adoptedAnimals } = await (
       await fetch(
-        `${NEXT_PUBLIC_PETFINDER_API_URL}/animals?type=${params.type}&status=adopted&limit=5`,
+        `${NEXT_PUBLIC_PETFINDER_API_URL}/animals?type=${typeParam}&status=adopted&limit=5`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -82,8 +100,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       type: {
-        ...type,
-        id: params.type,
+        ...(type || {}),
+        id: typeParam,
         breeds,
       },
       adoptedAnimals,
@@ -92,12 +110,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  let paths = [];
+  let paths: TypePath[] = [];
 
   try {
     const accessToken = await getAccessToken();
 
-    const { types } = await (
+    const { types }: AnimalTypesResponse = await (
       await fetch(`${NEXT_PUBLIC_PETFINDER_API_URL}/types`, {
         headers: {
           "Content-Type": "application/json",
@@ -108,7 +126,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     if (types.length > 0) {
       paths = types.map((type) => ({
-        params: { type: type._links.self.href.match(/\/types\/([\w-]+)$/)[1] },
+        params: {
+          type: (type._links.self.href.match(/\/types\/([\w-]+)$/) || "")[1],
+        },
       }));
     }
   } catch (err) {
