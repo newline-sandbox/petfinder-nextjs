@@ -1,10 +1,26 @@
+interface AnimalTypesEnum {
+  [key: string]: {
+    image: {
+      url: string;
+      styles?: {
+        backgroundPosition?: string;
+        objectPosition?: string;
+      };
+    };
+    photographer: {
+      name: string;
+      url: string;
+    };
+  };
+}
+
 // Currently, the Petfinder API does not provide a slugified identifier and stock image for each animal type.
 // Once the API provides these data, remove this enum.
 // Note: Since each image has different set of dimensions, we must apply corrective styling for consistency.
-export const ANIMAL_TYPES = {
+export const ANIMAL_TYPES: AnimalTypesEnum = {
   Dog: {
     image: {
-      url: "https://images.unsplash.com/photo-1507146426996-ef05306b995a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8",
+      url: "https://images.unsplash.com/photo-1507146426996-ef05306b995a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&w=320",
     },
     photographer: {
       name: "Berkay Gumustekin",
@@ -13,7 +29,7 @@ export const ANIMAL_TYPES = {
   },
   Cat: {
     image: {
-      url: "https://images.unsplash.com/photo-1598935888738-cd2622bcd437?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&fit=crop&w=300&q=80",
+      url: "https://images.unsplash.com/photo-1598935888738-cd2622bcd437?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&fit=crop&w=320&q=80",
       styles: {
         objectPosition: "center top",
       },
@@ -25,7 +41,7 @@ export const ANIMAL_TYPES = {
   },
   Rabbit: {
     image: {
-      url: "https://images.unsplash.com/photo-1619447257726-fe312296ee9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8",
+      url: "https://images.unsplash.com/photo-1619447257726-fe312296ee9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&w=320",
     },
     photographer: {
       name: "Paige Cody",
@@ -34,7 +50,7 @@ export const ANIMAL_TYPES = {
   },
   "Small & Furry": {
     image: {
-      url: "https://images.unsplash.com/photo-1618232118117-98d49b20e2f5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8",
+      url: "https://images.unsplash.com/photo-1618232118117-98d49b20e2f5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&w=320",
     },
     photographer: {
       name: "Doina Gavrilov",
@@ -43,7 +59,7 @@ export const ANIMAL_TYPES = {
   },
   Horse: {
     image: {
-      url: "https://images.unsplash.com/photo-1534773728080-33d31da27ae5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8",
+      url: "https://images.unsplash.com/photo-1534773728080-33d31da27ae5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&w=320",
     },
     photographer: {
       name: "Annie Spratt",
@@ -52,7 +68,7 @@ export const ANIMAL_TYPES = {
   },
   Bird: {
     image: {
-      url: "https://images.unsplash.com/photo-1522858547137-f1dcec554f55?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8",
+      url: "https://images.unsplash.com/photo-1522858547137-f1dcec554f55?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&w=320",
       styles: {
         objectPosition: "-1rem center",
       },
@@ -64,7 +80,7 @@ export const ANIMAL_TYPES = {
   },
   "Scales, Fins & Other": {
     image: {
-      url: "https://images.unsplash.com/photo-1604859347436-2e6925be8176?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8",
+      url: "https://images.unsplash.com/photo-1604859347436-2e6925be8176?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&w=320",
     },
     photographer: {
       name: "Eugene Chystiakov",
@@ -73,7 +89,7 @@ export const ANIMAL_TYPES = {
   },
   Barnyard: {
     image: {
-      url: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8",
+      url: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&w=320",
       styles: {
         objectPosition: "left center",
       },

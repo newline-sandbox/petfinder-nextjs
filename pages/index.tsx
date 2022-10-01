@@ -11,7 +11,7 @@ export interface HomePageProps {
 const { NEXT_PUBLIC_PETFINDER_API_URL, PETFINDER_ACCESS_TOKEN } = process.env;
 
 export const getStaticProps: GetStaticProps = async () => {
-  let types = [];
+  let types: AnimalType[] = [];
 
   try {
     ({ types } = await (
@@ -32,7 +32,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
           return {
             ...type,
-            id: type._links.self.href.match(/\/types\/([\w-]+)$/)[1],
+            id: (type._links.self.href.match(/\/types\/([\w-]+)$/) || "")[1],
             blurhash,
             img: {
               ...img,
