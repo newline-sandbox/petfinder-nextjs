@@ -39,14 +39,10 @@ const XCircle: FC<{ className?: string }> = ({ className }) => (
 interface AnimalAttributesProps {
   label: string;
   isTrue: boolean;
-  key?: string | number;
 }
 
-const AnimalAttribute: FC<AnimalAttributesProps> = ({ key, label, isTrue }) => (
-  <li
-    className="leading-3 inline-block px-3 py-1 bg-white rounded-full shadow-sm border-style border border-gray-100 mr-2 mt-1.5"
-    key={key}
-  >
+const AnimalAttribute: FC<AnimalAttributesProps> = ({ label, isTrue }) => (
+  <li className="leading-3 inline-block px-3 py-1 bg-white rounded-full shadow-sm border-style border border-gray-100 mr-2 mt-1.5">
     <span className="inline-block text-gray-500 font-semibold text-xs mr-1.5">
       {label}
     </span>
@@ -61,15 +57,13 @@ const AnimalAttribute: FC<AnimalAttributesProps> = ({ key, label, isTrue }) => (
 export interface AnimalCardProps {
   className?: string;
   animal: Animal;
-  key?: string | number;
 }
 
-const AnimalCard: FC<AnimalCardProps> = ({ className, animal, key }) => (
+const AnimalCard: FC<AnimalCardProps> = ({ className, animal }) => (
   <li
     className={`bg-white shadow sm:rounded-md block${
       className ? ` ${className}` : ""
     }`}
-    key={key}
   >
     <a
       href={animal.url}
